@@ -36,6 +36,8 @@ public class Event {
     private String title;
     private String description;
     private String location;
+    private int minParticipants;
+    private int maxParticipants;
 
     @Column(nullable = false)
     private LocalDate eventDate; // Data do evento
@@ -151,5 +153,21 @@ public class Event {
 
     public void setParticipantResponses(Map<User, Boolean> participantResponses) {
         this.participantResponses = participantResponses;
+    }
+
+    public int getMinParticipants() {
+        return minParticipants;
+    }
+
+    public void setMinParticipants(int minParticipants) {
+        this.minParticipants = minParticipants;
+    }
+
+    public int getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public void setMaxParticipants(int maxParticipants) {
+        this.maxParticipants = maxParticipants;
     }
 }

@@ -51,6 +51,8 @@ public class AdminUserConfig implements CommandLineRunner {
                     user.setBirthDate("23/02/2025");
                     user.setPhone("123456789");
                     user.setRoles(Set.of(roleAdmin));
+                    user.setZip("25510143");
+                    user.setPhoneShare(false);
 
                     userRepository.save(user);
                 }

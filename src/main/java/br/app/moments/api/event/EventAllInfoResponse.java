@@ -1,10 +1,13 @@
 package br.app.moments.api.event;
 
+import br.app.moments.api.user.ParticipantResponse;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.UUID;
+import java.util.List;
+import java.util.Set;
 
-public class EventRequest {
+public class EventAllInfoResponse {
     private String title;
     private String description;
     private String location;
@@ -12,7 +15,25 @@ public class EventRequest {
     private LocalTime eventTime;
     private int minParticipants;
     private int maxParticipants;
-    private UUID eventId;
+    private Set<ParticipantResponse> participantsList;
+
+    public EventAllInfoResponse(String title,
+        String description,
+        String location,
+        LocalDate eventDate,
+        LocalTime eventTime,
+        int minParticipants,
+        int maxParticipants,
+        Set<ParticipantResponse> participantsList) {
+            this.title = title;
+            this.description = description;
+            this.location = location;
+            this.eventDate = eventDate;
+            this.eventTime = eventTime;
+            this.minParticipants = minParticipants;
+            this.maxParticipants = maxParticipants;
+            this.participantsList = participantsList;
+    }
 
     public String getTitle() {
         return title;
@@ -70,11 +91,11 @@ public class EventRequest {
         this.maxParticipants = maxParticipants;
     }
 
-    public UUID getEventId() {
-        return eventId;
+    public Set<ParticipantResponse> getParticipantsList() {
+        return participantsList;
     }
 
-    public void setEventId(UUID eventId) {
-        this.eventId = eventId;
+    public void setParticipantsList(Set<ParticipantResponse> participantsList) {
+        this.participantsList = participantsList;
     }
 }

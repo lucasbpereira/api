@@ -2,6 +2,7 @@ package br.app.moments.api.token;
 
 import br.app.moments.api.event.Event;
 import br.app.moments.api.event.EventRepository;
+import br.app.moments.api.exceptions.UnauthorizedException;
 import br.app.moments.api.messages.MessageService;
 import br.app.moments.api.user.Role;
 import br.app.moments.api.user.RoleRepository;
@@ -50,6 +51,13 @@ public class TokenService {
     public LoginResponse createUser(RegisterRequest request) {
         var basicRole = roleRepository.findByName(Role.Values.BASIC.name());
 
+        if(userRepository.findByEmail(request.getEmail()).isPresent()) {
+            throw new UnauthorizedException(messageService.getMessage("error.conflict.email"));
+        }
+        if(userRepository.findByPhone(request.getPhone()).isPresent()) {
+            throw new UnauthorizedException(messageService.getMessage("error.conflict.phone"));
+        }
+
         User user = new User();
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -57,8 +65,16 @@ public class TokenService {
         user.setLastName(request.getLastName());
         user.setPhone(request.getPhone());
         user.setBirthDate(request.getBirthDate());
-        user.setInvitationCode(request.getInvitationCode());
         user.setRoles(Set.of(basicRole));
+        user.setPhoneShare(request.getPhoneShare());
+        user.setAddress(request.getAddress());
+        user.setHouseNumber(request.getHouseNumber());
+        user.setDistrict(request.getDistrict());
+        user.setState(request.getState());
+        user.setCountry(request.getCountry());
+        user.setCity(request.getCity());
+        user.setZip(request.getZip());
+
 
         userRepository.save(user);
 
@@ -66,9 +82,10 @@ public class TokenService {
         if (request.getInvitationCode() != null) {
             UUID eventId = UUID.fromString(request.getInvitationCode()); // Converte para UUID
             Event event = eventRepository.findByEventId(eventId);
-                event.getParticipants().add(user);
-                eventRepository.save(event);
-
+                if(event != null) {
+                    event.getParticipants().add(user);
+                    eventRepository.save(event);
+                }
         }
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setEmail(request.getEmail());

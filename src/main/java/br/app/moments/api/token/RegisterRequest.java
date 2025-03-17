@@ -16,6 +16,9 @@ public class RegisterRequest {
     private String gender;
     private String birthDate;
     private String invitationCode;
+    private Boolean phoneShare;
+    private String houseNumber;
+    private String district;
 
     public String getEmail() {
         return email;
@@ -119,5 +122,29 @@ public class RegisterRequest {
 
     public void setInvitationCode(String invitationCode) {
         this.invitationCode = invitationCode;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public Boolean getPhoneShare() {
+        return phoneShare;
+    }
+
+    public void setPhoneShare(Boolean phoneShare) {
+        this.phoneShare = phoneShare;
     }
 }

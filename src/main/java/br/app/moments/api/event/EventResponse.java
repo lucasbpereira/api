@@ -10,6 +10,8 @@ public class EventResponse {
     private String location;
     private LocalDate eventDate;
     private LocalTime eventTime;
+    private int minParticipants;
+    private int maxParticipants;
     private UUID eventId;
 
     public String getTitle() {
@@ -50,6 +52,22 @@ public class EventResponse {
 
     public void setEventTime(LocalTime eventTime) {
         this.eventTime = eventTime;
+    }
+
+    public int getMinParticipants() {
+        return minParticipants;
+    }
+
+    public void setMinParticipants(int minParticipants) {
+        this.minParticipants = minParticipants;
+    }
+
+    public int getMaxParticipants() {
+        return maxParticipants;
+    }
+
+    public void setMaxParticipants(int maxParticipants) {
+        this.maxParticipants = maxParticipants;
     }
 
     public UUID getEventId() {

@@ -2,6 +2,7 @@ package br.app.moments.api.token;
 
 import br.app.moments.api.event.Event;
 import br.app.moments.api.event.EventRepository;
+import br.app.moments.api.exceptions.UnauthorizedException;
 import br.app.moments.api.messages.MessageService;
 import br.app.moments.api.user.Role;
 import br.app.moments.api.user.RoleRepository;
@@ -31,12 +32,14 @@ public class TokenController {
     private final TokenService service;
     private final UserRepository userRepository;
     private final TokenService tokenService;
+    private final MessageService messageService;
 
-    public TokenController(TokenService service, UserRepository userRepository, TokenService tokenService) {
+    public TokenController(TokenService service, UserRepository userRepository, TokenService tokenService, MessageService messageService) {
 
         this.service = service;
         this.userRepository = userRepository;
         this.tokenService = tokenService;
+        this.messageService = messageService;
     }
 
     @PostMapping("/login")
@@ -52,15 +55,17 @@ public class TokenController {
 
         LoginResponse response = service.createUser(request);
 
-
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/users")
-    @PreAuthorize("hasAuthority('SCOPE_ADMIN')")
     public ResponseEntity<List<User>> listUsers(Authentication authentication) {
         var users = userRepository.findAll();
-        tokenService.isAdmin(authentication);
-        return ResponseEntity.ok(users);
+
+        if(tokenService.isAdmin(authentication)) {
+            return ResponseEntity.ok(users);
+        } else {
+            throw new UnauthorizedException(messageService.getMessage("error.unauthorized.function"));
+        }
     }
 }

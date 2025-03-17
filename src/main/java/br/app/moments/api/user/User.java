@@ -34,16 +34,29 @@ public class User {
 
     @Column(unique = true, nullable = false)
     private String phone;
+
+    @Column(nullable = false)
+    private Boolean phoneShare;
+
     private String address;
+
+    private String houseNumber;
+
+    private String district;
+
     private String city;
+
     private String state;
+
     private String country;
+
+    @Column(nullable = false)
     private String zip;
+
     private String gender;
 
     @Column(nullable = false)
     private String birthDate;
-    private String invitationCode;
 
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(
@@ -105,6 +118,14 @@ public class User {
         this.phone = phone;
     }
 
+    public Boolean getPhoneShare() {
+        return phoneShare;
+    }
+
+    public void setPhoneShare(Boolean phoneShare) {
+        this.phoneShare = phoneShare;
+    }
+
     public String getAddress() {
         return address;
     }
@@ -119,6 +140,22 @@ public class User {
 
     public void setCity(String city) {
         this.city = city;
+    }
+
+    public String getHouseNumber() {
+        return houseNumber;
+    }
+
+    public void setHouseNumber(String houseNumber) {
+        this.houseNumber = houseNumber;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
     }
 
     public String getState() {
@@ -159,14 +196,6 @@ public class User {
 
     public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
-    }
-
-    public String getInvitationCode() {
-        return invitationCode;
-    }
-
-    public void setInvitationCode(String invitationCode) {
-        this.invitationCode = invitationCode;
     }
 
     public Set<Role> getRoles() {
