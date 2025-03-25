@@ -1,98 +1,26 @@
 package br.app.moments.api.user;
 
 import br.app.moments.api.event.Event;
-import br.app.moments.api.token.LoginRequest;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
-@Entity
-@Table(name = "users")
-public class User {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(name = "user_id")
-    private UUID userId;
-
-    @Column(unique = true, nullable = false)
-    private String email;
-
-    @Column(nullable = false)
-    @JsonIgnore
-    private String password;
-
-    @Column(nullable = false)
-    private String firstName;
-
-    @Column(nullable = false)
-    private String lastName;
-
-    @Column(unique = true, nullable = false)
-    private String phone;
-
-    @Column(nullable = false)
-    private Boolean phoneShare;
-
-    private String street;
-
-    private String houseNumber;
-
-    private String neighborhood;
-
-    private String city;
-
-    private String state;
-
-    private String country;
-
-    @Column(nullable = false)
-    private String cep;
-
-    private String gender;
-
-    @Column(nullable = false)
-    private String birthDate;
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name="users_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id")
-    )
-    private Set<Role> roles;
-
-    @ManyToMany(mappedBy = "participants")
-    @JsonIgnore
-    private Set<Event> events = new HashSet<>();
-
-    public UUID getUserId() {
-        return userId;
-    }
-
-    public void setUserId(UUID userId) {
-        userId = userId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
+public class UserResponse {
+    String firstName;
+    String lastName;
+    String phone;
+    Boolean phoneShare;
+    String street;
+    String houseNumber;
+    String neighborhood;
+    String city;
+    String state;
+    String country;
+    String cep;
+    String gender;
+    String birthDate;
+    Set<Role> roles;
+    Set<Event> events = new HashSet<>();
 
     public String getFirstName() {
         return firstName;
@@ -134,14 +62,6 @@ public class User {
         this.street = street;
     }
 
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
     public String getHouseNumber() {
         return houseNumber;
     }
@@ -156,6 +76,14 @@ public class User {
 
     public void setNeighborhood(String neighborhood) {
         this.neighborhood = neighborhood;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     public String getState() {
@@ -212,11 +140,5 @@ public class User {
 
     public void setEvents(Set<Event> events) {
         this.events = events;
-    }
-
-    public boolean isLoginCorrect(LoginRequest loginRequest, PasswordEncoder passwordEncoder) {
-
-
-        return passwordEncoder.matches(loginRequest.getPassword(), this.password);
     }
 }

@@ -8,17 +8,17 @@ public class RegisterRequest {
     private String firstName;
     private String lastName;
     private String phone;
-    private String address;
+    private String street;
     private String city;
     private String state;
     private String country;
-    private String zip;
+    private String cep;
     private String gender;
     private String birthDate;
     private String invitationCode;
     private Boolean phoneShare;
     private String houseNumber;
-    private String district;
+    private String neighborhood;
 
     public String getEmail() {
         return email;
@@ -60,12 +60,12 @@ public class RegisterRequest {
         this.phone = phone;
     }
 
-    public String getAddress() {
-        return address;
+    public String getStreet() {
+        return street;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getCity() {
@@ -92,12 +92,12 @@ public class RegisterRequest {
         this.country = country;
     }
 
-    public String getZip() {
-        return zip;
+    public String getCep() {
+        return cep;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setCep(String cep) {
+        this.cep = cep;
     }
 
     public String getGender() {
@@ -124,12 +124,12 @@ public class RegisterRequest {
         this.invitationCode = invitationCode;
     }
 
-    public String getDistrict() {
-        return district;
+    public String getNeighborhood() {
+        return neighborhood;
     }
 
-    public void setDistrict(String district) {
-        this.district = district;
+    public void setNeighborhood(String neighborhood) {
+        this.neighborhood = neighborhood;
     }
 
     public String getHouseNumber() {

@@ -67,13 +67,13 @@ public class TokenService {
         user.setBirthDate(request.getBirthDate());
         user.setRoles(Set.of(basicRole));
         user.setPhoneShare(request.getPhoneShare());
-        user.setAddress(request.getAddress());
+        user.setStreet(request.getStreet());
         user.setHouseNumber(request.getHouseNumber());
-        user.setDistrict(request.getDistrict());
+        user.setNeighborhood(request.getNeighborhood());
         user.setState(request.getState());
         user.setCountry(request.getCountry());
         user.setCity(request.getCity());
-        user.setZip(request.getZip());
+        user.setCep(request.getCep());
 
 
         userRepository.save(user);
